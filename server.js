@@ -42,6 +42,7 @@ const bookSchema = new Schema(
         Cover: String,
         Synopsis: String,
         Publisher: String,
+        Genre: String,
         Year: Number,
         Review: String,
         Pages: Number
