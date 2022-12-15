@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const Book = require('../models/Books')
+const Book = require('../models/Books.js')
 
 router.get('/', async(req,res) => {
     res.json(await Book.find({}).catch((err) => res.status(400).json(err)))
