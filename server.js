@@ -1,11 +1,14 @@
 require('dotenv').config()
-const Book = require('../models/Books')
+
 const PORT = process.env.PORT || 5020
 
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 const { default: mongoose } = require('mongoose')
+const { Schema } = mongoose
+const { model } = mongoose
+
 
 //const mongoose = require('./db/connection')
 
@@ -30,6 +33,24 @@ const connectDB = async () => {
 // app.use('/books', bookRouter)
 
 //app.listen(PORT, () => console.log(`Listening on port ${PORT}`))
+
+
+const bookSchema = new Schema(
+    {
+        Title: String,
+        Author: String,
+        Cover: String,
+        Synopsis: String,
+        Publisher: String,
+        Year: Number,
+        Review: String,
+        Pages: Number
+
+    },
+    {timestamps: true}
+)
+// modules not working on cyclic
+const Book = model('Book', bookSchema)
 
 
 app.get('/', async(req,res) => {
