@@ -81,7 +81,7 @@ app.get('/', async(req,res) => {
     
     app.delete('/:id', async(req, res) => {
         try{
-            const deletedBook = await Book.findByIdANDRemove(req.params.id)
+            const deletedBook = await Book.findByIdAndRemove(req.params.id)
             res.json(deletedBook)
         }catch(error){
             res.status(400).json(error)
