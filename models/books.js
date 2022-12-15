@@ -6,15 +6,16 @@ const bookSchema = new Schema(
     {
         Title: String,
         Author: String,
+        Cover: String,
         Synopsis: String,
         Publisher: String,
-        Year: Integer,
+        Year: Number,
         Review: String,
-        Pages: Integer
+        Pages: Number
 
     },
     {timestamps: true}
 )
 
-const Book = model('Book', bookSchema)
-module.exports = Book
+const Books = model('Book', bookSchema)
+module.exports = Books

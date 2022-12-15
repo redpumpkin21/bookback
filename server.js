@@ -14,6 +14,9 @@ app.use(cors())
 app.use(express.json())
 app.use(morgan('tiny'))
 
+const bookRouter= require('./controllers/book')
+
 app.get('/', (req, res) => res.send('Server is working'))
+app.use('/books', bookRouter)
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`))
