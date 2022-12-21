@@ -61,8 +61,8 @@ app.get('/', async(req,res) => {
     
 app.get('/:id', async(req,res) => {
     try{
-        const id = req.params
-        const data = await Book.getById(id)
+        const id = req.params.id
+        const data = await Book.findById(id, req.body)
         res.json(data)
     }catch(error){
         res.status(400).json(error)
