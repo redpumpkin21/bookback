@@ -59,11 +59,17 @@ app.get('/', async(req,res) => {
         res.json(await Book.find({}).catch((err) => res.status(400).json(err)))
     })
     
-router.get('/:id', async(req,res) => {
-    res.json(await Book.find({}).catch((err) => res.status(400).json(err)))
+app.get('/:id', async(req,res) => {
+    try{
+        const id = req.params
+        const data = await Book.getById(id)
+        res.json(data)
+    }catch(error){
+        res.status(400).json(error)
+    }
 })
 
-    router.post('/', async(req, res) => {
+    app.post('/', async(req, res) => {
         try {
             const newBook = await Book.create(req.body)
             res.json(newBook)
@@ -72,7 +78,7 @@ router.get('/:id', async(req,res) => {
         }
     })
     
-    router.put('/:id', async(req, res) =>{
+    app.put('/:id', async(req, res) =>{
         try{
             const updatedBook = await Book.findByIdAndUpdate(
                 req.params.id,
@@ -85,7 +91,7 @@ router.get('/:id', async(req,res) => {
         }
     })
     
-    router.delete('/:id', async(req, res) => {
+    app.delete('/:id', async(req, res) => {
         try{
             const deletedBook = await Book.findByIdAndRemove(req.params.id)
             res.json(deletedBook)
