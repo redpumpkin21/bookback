@@ -55,7 +55,7 @@ const bookSchema = new Schema(
 const Book = model('Book', bookSchema)
 
 
-router.get('/', async(req,res) => {
+app.get('/', async(req,res) => {
         res.json(await Book.find({}).catch((err) => res.status(400).json(err)))
     })
     
