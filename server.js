@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 5020
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
+var router = express.Router()
 const { default: mongoose } = require('mongoose')
 const { Schema } = mongoose
 const { model } = mongoose
@@ -54,11 +55,15 @@ const bookSchema = new Schema(
 const Book = model('Book', bookSchema)
 
 
-app.get('/', async(req,res) => {
+router.get('/', async(req,res) => {
         res.json(await Book.find({}).catch((err) => res.status(400).json(err)))
     })
     
-    app.post('/', async(req, res) => {
+router.get('/:id', async(req,res) => {
+    res.json(await Book.find({}).catch((err) => res.status(400).json(err)))
+})
+
+    router.post('/', async(req, res) => {
         try {
             const newBook = await Book.create(req.body)
             res.json(newBook)
@@ -67,7 +72,7 @@ app.get('/', async(req,res) => {
         }
     })
     
-    app.put('/:id', async(req, res) =>{
+    router.put('/:id', async(req, res) =>{
         try{
             const updatedBook = await Book.findByIdAndUpdate(
                 req.params.id,
@@ -80,7 +85,7 @@ app.get('/', async(req,res) => {
         }
     })
     
-    app.delete('/:id', async(req, res) => {
+    router.delete('/:id', async(req, res) => {
         try{
             const deletedBook = await Book.findByIdAndRemove(req.params.id)
             res.json(deletedBook)
