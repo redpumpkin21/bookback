@@ -46,7 +46,9 @@ const bookSchema = new Schema(
         Genre: String,
         Year: Number,
         Review: String,
-        Pages: Number
+        Pages: Number,
+        Link: String,
+        Rating: Number
 
     },
     {timestamps: true}
